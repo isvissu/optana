@@ -5,7 +5,6 @@ var Joi    = require('joi');
 var Vision = require('vision');
 var server = new Hapi.Server({ debug: {"request": ["error", "uncaught"]} })
 var validator = require('validator'); // github.com/chriso/validator.js
-
 //}}}
 //{{{ jos handlers
 var register_fields = {

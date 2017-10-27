@@ -1,21 +1,23 @@
 {
-  "name": "hapi-validation",
-  "version": "1.0.2",
-  "description": "Hapi.js Validation with Joi + failAction question.",
+  "name": "optana",
+  "version": "0.0.1",
+  "description": "This is cutting edge tool on gps services",
   "main": "server.js",
   "scripts": {
     "fast": "./node_modules/tape/bin/tape ./test/*.js",
     "test": "istanbul cover ./node_modules/tape/bin/tape ./test.js  | node_modules/tap-spec/bin/cmd.js",
-    "start": "PORT=8000 ./node_modules/.bin/nodemon example/server.js"
+    "start": "PORT=8080 ./node_modules/.bin/nodemon example/server.js"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/isvissu/optana.git"
   },
   "keywords": [
-    "validation",
-    "failAction",
-    "Map"
+    "optana",
+    "map",
+    "car",
+    "security",
+    "tracking"
   ],
   "author": "Viswateja Gajulavarthy",
   "license": "GPL-2.0",
