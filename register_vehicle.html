@@ -42,31 +42,31 @@
     <br>
     <form class="form-horizontal" action="/register" method="POST">
       <div class="form-group">
-        <label for="name" class="col-sm-2 control-label">Name <span class="required-field">*</span></label>
-        <div class="col-sm-10">
+        <label for="name" class="col-sm-4 control-label">Name<span class="required-field">*</span></label>
+        <div class="col-sm-8">
           <input class="form-control {{error.name.class}}" required
           id="name" name="name" placeholder="Your Name" value="{{values.name}}">
           <p class='help-block'>{{error.name.message}}</p>
         </div>
       </div>
       <div class="form-group">
-        <label for="code" class="col-sm-2 control-label">Email <span class="required-field">*</span></label>
-        <div class="col-sm-10">
+        <label for="code" class="col-sm-4 control-label">Email<span class="required-field">*</span></label>
+        <div class="col-sm-8">
           <input class="form-control {{error.code.class}}" required
           id="code" name="code" placeholder="code" value="{{values.code}}">
           <p class='help-block'>{{error.code.message}}</p>
         </div>
       </div>
       <div class="form-group">
-        <label for="imei" class="col-sm-2 control-label">imei<span class="required-field">*</span></label>
-        <div class="col-sm-10">
+        <label for="imei" class="col-sm-4 control-label">imei<span class="required-field">*</span></label>
+        <div class="col-sm-8">
           <input class="form-control {{error.imei.class}}" required
           id="code" name="imei" placeholder="imei" value="{{values.imei}}">
           <p class='help-block'>{{error.imei.message}}</p>
         </div>
       </div>
-        <label for="phone" class="col-sm-2 control-label">Phone <span class="required-field">*</span></label>
-        <div class="col-sm-10">
+        <label for="phone" class="col-sm-4 control-label">Phone<span class="required-field">*</span></label>
+        <div class="col-sm-8">
           <input class="form-control {{error.phone.class}}" required
           id="code" name="phone" placeholder="phone" value="{{values.phone}}">
           <p class='help-block'>{{error.phone.message}}</p>
