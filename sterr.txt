@@ -1,0 +1,10 @@
+Debug: handler, error 
+    {"msec":1.3089569956064224,"error":"Not Found","data":{"data":null,"isBoom":true,"isServer":false,"output":{"statusCode":404,"payload":{"statusCode":404,"error":"Not Found"},"headers":{}},"message":"Not Found"}}
+Debug: handler, error 
+    {"msec":0.12780001759529114,"error":"Not Found","data":{"data":null,"isBoom":true,"isServer":false,"output":{"statusCode":404,"payload":{"statusCode":404,"error":"Not Found"},"headers":{}},"message":"Not Found"}}
+Debug: handler, error 
+    {"msec":0.09581899642944336,"error":"Not Found","data":{"data":null,"isBoom":true,"isServer":false,"output":{"statusCode":404,"payload":{"statusCode":404,"error":"Not Found"},"headers":{}},"message":"Not Found"}}
+Debug: handler, error 
+    {"msec":0.45458999276161194,"error":"Not Found","data":{"data":null,"isBoom":true,"isServer":false,"output":{"statusCode":404,"payload":{"statusCode":404,"error":"Not Found"},"headers":{}},"message":"Not Found"}}
+Debug: handler, error 
+    {"msec":0.1573980152606964,"error":"Not Found","data":{"data":null,"isBoom":true,"isServer":false,"output":{"statusCode":404,"payload":{"statusCode":404,"error":"Not Found"},"headers":{}},"message":"Not Found"}}

@@ -171,7 +171,7 @@ function vac_handler(request, reply, source, error){
 }
 //}}}
 //{{{ server connection and the routes which are defined above
-server.connection({ port: process.env.PORT || 8000 });
+server.connection({ port: process.env.PORT || 8080 });
 server.register(Vision, function (err) {
   assert(!err, 'Failed to load plugin: ', err); // FATAL ERROR!
 
