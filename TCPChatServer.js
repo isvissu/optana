@@ -98,6 +98,29 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC"+LAC+"\n CI : "+CI+"\n RSSI : "+RSSI+"\n LAC1"+LAC1+"\n CI1 : "+CI1+"\n RSSI1 : "+RSSI1+"\n LAC2"+LAC2+"\n CI2 : "+CI2+"\n RSSI2 : "+RSSI2+"\n LAC3"+LAC3+"\n CI3 : "+CI3+"\n RSSI3 : "+RSSI3+"\n LAC4"+LAC4+"\n CI4 : "+CI4+"\n RSSI4 : "+RSSI4+"\n LAC5"+LAC5+"\n CI5 : "+CI5+"\n RSSI5 : "+RSSI5+"\n LAC6"+LAC6+"\n CI6 : "+CI6+"\n RSSI6 : "+RSSI6+"\n TimingAdvance : "+TimingAdvance+"\n Language : "+Language+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
+      //{{{ specfic code for Alarm Packet Sent by Terminal One Fence
+      else if(ProtocalNumber == "26"){
+      var DateTime = str.substring(8,20);
+      var QualityOfGPSSignal = str.substring(20,22);
+      var Latitude = str.substring(22,30);
+      var Longitude = str.substring(30,38);
+      var Speed = str.substring(38,40);
+      var CourseStatus = str.substring(40,44);
+      var LBSLength = str.substring(44,46);
+      var MCC = str.substring(46,50);
+      var MNC = str.substring(50,52);
+      var LAC = str.substring(52,56);
+      var CELLID = str.substring(56,62);
+      var TerminalInformation = str.substring(62,64);
+      var VoltageLevel = str.substring(64,66);
+      var GSMSignalStrength = str.substring(66,68);
+      var AlarmLanguage = str.substring(68,72);
+      var InformationSerialNumber = str.substring(72,76);
+      var ErrorCheck = str.substring(76,80);
+      var StopBit = str.substring(80,84);
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n ACC : "+ACC+"\n DataUploadMode : "+DataUploadMode+"\n GPS Real Time Re-Upload : "+GPSRealTimeReUpload+"\n Mileage : "+Mileage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      }
+      //}}}
 
 
       //broadcast(socket.name + ">" + data , socket);

@@ -759,7 +759,6 @@ var str = hex.tostring(16);
 //}}}
 //{{{ Alram Packet Sent by Terminal One Fence
 //787822220F0C1D023305C9027AC8180C46586000140001CC00287D001F71000001000820860D0A
-// functions LBS Multiple Base Extension Packet
 //=> 78 78 				 0- 4	start code
 //=> 25					 4- 6	packet length
 //=> 26					 6- 8 	protocal number
