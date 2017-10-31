@@ -191,6 +191,20 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n PhoneNumber :"+PhoneNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
+      //{{{ specfic code for Terminal Address Request Packet
+      else if(ProtocalNumber == "22"){
+      var MCC = str.substring(8,12);
+      var MNC = str.substring(12,14);
+      var LAC = str.substring(14,18);
+      var CELLID = str.substring(18,24);
+      var PhoneNumber = str.substring(24,66);
+      var AlarmLanguage = str.substring(66,70);
+      var InformationSerialNumber = str.substring(70,74);
+      var ErrorCheck = str.substring(74,78);
+      var StopBit = str.substring(78,82);
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n ACC : "+ACC+"\n DataUploadMode : "+DataUploadMode+"\n GPS Real Time Re-Upload : "+GPSRealTimeReUpload+"\n Mileage : "+Mileage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      }
+      //}}}
 
 
       //broadcast(socket.name + ">" + data , socket);
