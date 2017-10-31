@@ -515,7 +515,7 @@ net.createServer(function (socket) {
       //E05DDE5E025B665927655980B27EA6003200377C73002E002C00310030003A003400
       //3326260000000000000000000000000000000000000000002323001CEA970D0A
       //=> 78 78 				 0- 4	Start Code
-      //=> 05					 4- 6	Length of data bit
+      //=> 05					 4- 6	Length of data bit (1 + 1 + 4 + M + 2 + 2 + 2)
       //=> 17					 6- 8 	protocal number
       //=> 99					 8-10	Length of Command => M
       //=> 0D 0A 				10-18	Server Flag Bit
@@ -525,12 +525,10 @@ net.createServer(function (socket) {
       //=> 0D 0A 			*   26+M-30+M	Error Check
       //=> 0D 0A 			*   30+M-34+M	Stop Bit
       if(ProtocalNumber == "17"){
-      var LengthOfCommand = parseInt(str.substring(8,10));
+      var LengthOfCommand = parseInt(str.substring(8,10)) -24;
       var ServerFlagBit = str.substring(10,18);
-      var ADDRESS = str.substring(18,32);
-      var grabage1 = str.substring(32,36);
-      var AddressContent = str.substring(36,36+LengthOfCommand);
-      var grabage2 = str.substring(36 + LengthOfCommand,38 + LengthOfCommand);
+      var CommandContent = str.substring(18,18+LengthOfCommand);
+      var Language = str.substring(18 + LengthOfCommand,38 + LengthOfCommand);
       var PhoneNumber = str.substring(38 + LengthOfCommand , 80 + LengthOfCommand);
       var grabage3 = str.substring(80 + LengthOfCommand, 82 + LengthOfCommand);
       var InformationSerialNumber = str.substring(82 + LengthOfCommand , 86 + LengthOfCommand);
@@ -539,7 +537,7 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n LengthOfCommand : "+LengthOfCommand+"\n ServerFlagBit : "+ServerFlagBit+"\n ADDRESS : "+ADDRESS+"\n grabage1 : "+grabage1+"\n AddressContent : "+AddressContent+"\n AddressContent : "+AddressContent+"\n grabage2 : "+grabage2+"\n PhoneNumber : "+PhoneNumber+"\n grabage3 : "+grabage3+"\n InformationSerialNumber :"+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Online command replied by terminal
+      //{{{ specfic code for Online command replied by terminal ---+
       //78789F179900000001414C41524D534D532626970752A862A58B66003A0047
       //0054003000360044002D00310032003800330036002D005A004A004D002C5E7F4E1C
       //7701002E60E05DDE5E02002E60E057CE533A002E4E915C71897F8DEF002E79BB60
