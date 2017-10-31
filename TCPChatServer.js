@@ -607,13 +607,13 @@ net.createServer(function (socket) {
       //3326260000000000000000000000000000000000000000002323001CEA970D0A
       //=> 78 78 				 0- 4	Start Code
       //=> 05					 4- 6	Length of data bit (1+1+M+2+2)
-      //=> 17					 6- 8 	protocal number
+      //=> 94					 6- 8 	protocal number
       //=> 0D 0A 				 8-10	Information Type
       //=> 0D 0A 			*   10  -10+M   Data Content
       //=> 0D 0A 			*   10+M-14+M	Serial Number
       //=> 0D 0A 			*   14+M-18+M	Error Check
       //=> 0D 0A 			*   18+M-22+M	Stop Bit
-      if(ProtocalNumber == "17"){
+      if(ProtocalNumber == "94"){
       var LengthOfCommand = parseInt(str.substring(4,6)) - 12;
       var InformationType = str.substring(8,10);
       var DataContent = str.substring(10,10+LengthOfCommand);
