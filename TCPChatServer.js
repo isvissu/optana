@@ -121,6 +121,30 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n LBSLength : "+LBSLength+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n TerminalInformation : "+TerminalInformation+"\n VoltageLevel : "+VoltageLevel+"\n GSMSignalStrength : "+GSMSignalStrength+"\n AlarmLanguage : "+AlarmLanguage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
+     //{{{ specfic code for Alarm Packet Sent by Terminal Many Fence
+      else if(ProtocalNumber == "27"){
+      var DateTime = str.substring(8,20);
+      var QualityOfGPSSignal = str.substring(20,22);
+      var Latitude = str.substring(22,30);
+      var Longitude = str.substring(30,38);
+      var Speed = str.substring(38,40);
+      var CourseStatus = str.substring(40,44);
+      var LBSLength = str.substring(44,46);
+      var MCC = str.substring(46,50);
+      var MNC = str.substring(50,52);
+      var LAC = str.substring(52,56);
+      var CELLID = str.substring(56,62);
+      var TerminalInformation = str.substring(62,64);
+      var VoltageLevel = str.substring(64,66);
+      var GSMSignalStrength = str.substring(66,68);
+      var AlarmLanguage = str.substring(68,72);
+      var FenceNumber = str.substring(72,74);
+      var InformationSerialNumber = str.substring(74,78);
+      var ErrorCheck = str.substring(78,82);
+      var StopBit = str.substring(82,86);
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n LBSLength : "+LBSLength+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n TerminalInformation : "+TerminalInformation+"\n VoltageLevel : "+VoltageLevel+"\n GSMSignalStrength : "+GSMSignalStrength+"\n AlarmLanguage : "+AlarmLanguage+"\n FenceNumber : "+FenceNumber+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      }
+      //}}}
 
 
       //broadcast(socket.name + ">" + data , socket);
