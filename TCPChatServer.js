@@ -590,16 +590,19 @@ net.createServer(function (socket) {
       //=> 05					 4- 6	packet length
       //=> 8A					 6- 8 	protocal number
       //=> 00 05				 8-20	Information Content
-      //=> 9F F8				20-24	Error Check
-      //=> 0D 0A 				24-28	Stop Bit
+      //=> 00 05				20-24	Information Serial Number
+      //=> 9F F8				24-28	Error Check
+      //=> 0D 0A 				28-32	Stop Bit
       if(ProtocalNumber == "8A"){
+      var PacketLength = parseInt( str.substring(4,6));
       var InformationContent = str.substring(8,20);
-      var ErrorCheck = str.substring(20,24);
-      var StopBit = str.substring(24,28);
-      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      var InformationSerialNumber = str.substring(20,24);
+      var ErrorCheck = str.substring(24,28);
+      var StopBit = str.substring(28,32);
+      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n InformationContent : "+InformationContent+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Information Transmission Packet Sent by terminal
+      //{{{ specfic code for Information Transmission Packet Sent by terminal ---+
       //78789F179900000001414C41524D534D532626970752A862A58B66003A0047
       //0054003000360044002D00310032003800330036002D005A004A004D002C5E7F4E1C
       //7701002E60E05DDE5E02002E60E057CE533A002E4E915C71897F8DEF002E79BB60
