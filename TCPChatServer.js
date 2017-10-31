@@ -145,6 +145,22 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n LBSLength : "+LBSLength+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n TerminalInformation : "+TerminalInformation+"\n VoltageLevel : "+VoltageLevel+"\n GSMSignalStrength : "+GSMSignalStrength+"\n AlarmLanguage : "+AlarmLanguage+"\n FenceNumber : "+FenceNumber+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
+      //{{{ specfic code for chinese Responce of Server address alarm packet
+      if(ProtocalNumber == "17"){
+      var LengthOfCommand = parseInt(str.substring(8,10));
+      var ServerFlagBit = str.substring(10,18);
+      var ADDRESS = str.substring(18,32);
+      var grabage1 = str.substring(32,36);
+      var AddressContent = str.substring(36,36+LengthOfCommand);
+      var grabage2 = str.substring(36 + LengthOfCommand,38 + LengthOfCommand);
+      var PhoneNumber = str.substring(38 + LengthOfCommand , 80 + LengthOfCommand);
+      var grabage1 = str.substring(80 + LengthOfCommand, 82 + LengthOfCommand);
+      var InformationSerialNumber = str.substring(82 + LengthOfCommand , 86 + LengthOfCommand);
+      var ErrorCheck = str.substring(86 + LengthOfCommand,90 + LengthOfCommand);
+      var StopBit = str.substring(90 + LengthOfCommand,94 + LengthOfCommand);
+      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal ID : "+TerminalID+"\n model Identification Code : "+ModelIDCode+"\n TimeZone and Language code : "+TimeZoneLang+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      }
+      //}}}
 
 
       //broadcast(socket.name + ">" + data , socket);
