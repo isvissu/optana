@@ -30,15 +30,72 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal ID : "+TerminalID+"\n model Identification Code : "+ModelIDCode+"\n TimeZone and Language code : "+TimeZoneLang+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for login packet
-      else if(ProtocalNumber == "01"){
-      var TerminalID = str.substring(8,26);
-      var ModelIDCode = str.substring(26,30);
-      var TimeZoneLang = str.substring(30,34);
-      var InformationSerialNumber = str.substring(34,36);
-      var ErrorCheck = str.substring(36,40);
-      var StopBit = str.substring(40,44);
-      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal ID : "+TerminalID+"\n model Identification Code : "+ModelIDCode+"\n TimeZone and Language code : "+TimeZoneLang+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      //{{{ specfic code for heart beat packet
+      else if(ProtocalNumber == "13"){
+      var TerminalInformationContent = str.substring(8,10);
+      var VoltageLevel = str.substring(10,12);
+      var SGMSignalStrength = str.substring(12,14);
+      var TimeZonePort = str.substring(14,18);
+      var InformationSerialNumber = str.substring(18,22);
+      var ErrorCheck = str.substring(22,26);
+      var StopBit = str.substring(26,30);
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal Information Content : "+TerminalInformationContent+"\n SGM Signal Strength : "+SGMSignalStrength+"\n TimeZone and Port code : "+TimeZonePort+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      }
+      //}}}
+      //{{{ specfic code for Location packet
+      else if(ProtocalNumber == "22"){
+      var DateTime = str.substring(8,20);
+      var QualityOfGPSSignal = str.substring(20,22);
+      var Latitude = str.substring(22,30);
+      var Longitude = str.substring(30,38);
+      var Speed = str.substring(38,42);
+      var CourseStatus = str.substring(42,44);
+      var MCC = str.substring(44,48);
+      var MNC = str.substring(48,50);
+      var LAC = str.substring(50,54);
+      var CELLID = str.substring(54,60);
+      var ACC = str.substring(60,62);
+      var DataUploadMode = str.substring(62,64);
+      var GPSRealTimeReUpload = str.substring(64,68);
+      var Mileage = str.substring(68,76);
+      var InformationSerialNumber = str.substring(76,82);
+      var ErrorCheck = str.substring(82,86);
+      var StopBit = str.substring(86,90);
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n ACC : "+ACC+"\n DataUploadMode : "+DataUploadMode+"\n GPS Real Time Re-Upload : "+GPSRealTimeReUpload+"\n Mileage : "+Mileage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      }
+      //}}}
+      //{{{ specfic code for LBS Multiple Base Extension Packet
+      else if(ProtocalNumber == "28"){
+      var DateTime = str.substring(8,20);
+      var MCC = str.substring(20,24);
+      var MNC = str.substring(24,26);
+      var LAC = str.substring(26,30);
+      var CI  = str.substring(30,36);
+      var RSSI = str.substring(36,38);
+      var NLAC1 = str.substring(38,42);
+      var NCI1 = str.substring(42,48);
+      var NRSSI1 = str.substring(48,50);
+      var NLAC2 = str.substring(50,54);
+      var NCI2 = str.substring(54,60);
+      var NRSSI2 = str.substring(60,62);
+      var NLAC3 = str.substring(62,64);
+      var NCI3 = str.substring(64,70);
+      var NRSSI3 = str.substring(70,72);
+      var NLAC4 = str.substring(72,74);
+      var NCI4 = str.substring(74,80);
+      var NRSSI4 = str.substring(80,82);
+      var NLAC5 = str.substring(82,84);
+      var NCI5 = str.substring(84,90);
+      var NRSSI5 = str.substring(90,92);
+      var NLAC6 = str.substring(92,94);
+      var NCI6 = str.substring(94,100);
+      var NRSSI6 = str.substring(100,102);
+      var TimingAdvance = str.substring(102,104);
+      var Language = str.substring(104,108);
+      var InformationSerialNumber = str.substring(108,112);
+      var ErrorCheck = str.substring(112,116);
+      var StopBit = str.substring(116,120);
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n ACC : "+ACC+"\n DataUploadMode : "+DataUploadMode+"\n GPS Real Time Re-Upload : "+GPSRealTimeReUpload+"\n Mileage : "+Mileage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
 
