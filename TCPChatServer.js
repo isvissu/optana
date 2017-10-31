@@ -145,6 +145,22 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n LBSLength : "+LBSLength+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n TerminalInformation : "+TerminalInformation+"\n VoltageLevel : "+VoltageLevel+"\n GSMSignalStrength : "+GSMSignalStrength+"\n AlarmLanguage : "+AlarmLanguage+"\n FenceNumber : "+FenceNumber+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
+      //{{{ specfic code for english Responce of Server address alarm packet
+      if(ProtocalNumber == "17"){
+      var LengthOfCommand = parseInt(str.substring(8,10));
+      var ServerFlagBit = str.substring(10,18);
+      var ADDRESS = str.substring(18,32);
+      var grabage1 = str.substring(32,36);
+      var AddressContent = str.substring(36,36+LengthOfCommand);
+      var grabage2 = str.substring(36 + LengthOfCommand,38 + LengthOfCommand);
+      var PhoneNumber = str.substring(38 + LengthOfCommand , 80 + LengthOfCommand);
+      var grabage3 = str.substring(80 + LengthOfCommand, 82 + LengthOfCommand);
+      var InformationSerialNumber = str.substring(82 + LengthOfCommand , 86 + LengthOfCommand);
+      var ErrorCheck = str.substring(86 + LengthOfCommand,90 + LengthOfCommand);
+      var StopBit = str.substring(90 + LengthOfCommand,94 + LengthOfCommand);
+      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n LengthOfCommand : "+LengthOfCommand+"\n ServerFlagBit : "+ServerFlagBit+"\n ADDRESS : "+ADDRESS+"\n grabage1 : "+grabage1+"\n AddressContent : "+AddressContent+"\n AddressContent : "+AddressContent+"\n grabage2 : "+grabage2+"\n PhoneNumber : "+PhoneNumber+"\n grabage3 : "+grabage3+"\n InformationSerialNumber :"+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      }
+      //}}}
       //{{{ specfic code for chinese Responce of Server address alarm packet
       if(ProtocalNumber == "17"){
       var LengthOfCommand = parseInt(str.substring(8,10));
@@ -159,6 +175,20 @@ net.createServer(function (socket) {
       var ErrorCheck = str.substring(86 + LengthOfCommand,90 + LengthOfCommand);
       var StopBit = str.substring(90 + LengthOfCommand,94 + LengthOfCommand);
       console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n LengthOfCommand : "+LengthOfCommand+"\n ServerFlagBit : "+ServerFlagBit+"\n ADDRESS : "+ADDRESS+"\n grabage1 : "+grabage1+"\n AddressContent : "+AddressContent+"\n AddressContent : "+AddressContent+"\n grabage2 : "+grabage2+"\n PhoneNumber : "+PhoneNumber+"\n grabage3 : "+grabage3+"\n InformationSerialNumber :"+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      }
+      //}}}
+      //{{{ specfic code for GPS Address Request packet
+      else if(ProtocalNumber == "26"){
+      var DateTime = str.substring(8,20);
+      var QualityOfGPSSignal = str.substring(20,22);
+      var Latitude = str.substring(22,30);
+      var Longitude = str.substring(30,38);
+      var Speed = str.substring(38,40);
+      var CourseStatus = str.substring(40,44);
+      var PhoneNumber = str.substring(44,86);
+      var ErrorCheck = str.substring(86,90);
+      var StopBit = str.substring(90,94);
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n PhoneNumber :"+PhoneNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
 
