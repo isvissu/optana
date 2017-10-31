@@ -508,7 +508,7 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n PhoneNumber :"+PhoneNumber+"\n AlarmLanguage : "+AlarmLanguage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Online command sent by server
+      //{{{ specfic code for 80 Online command sent by server ---+
       //78789F179900000001414C41524D534D532626970752A862A58B66003A0047
       //0054003000360044002D00310032003800330036002D005A004A004D002C5E7F4E1C
       //7701002E60E05DDE5E02002E60E057CE533A002E4E915C71897F8DEF002E79BB60
@@ -516,7 +516,7 @@ net.createServer(function (socket) {
       //3326260000000000000000000000000000000000000000002323001CEA970D0A
       //=> 78 78 				 0- 4	Start Code
       //=> 05					 4- 6	Length of data bit (1 + 1 + 4 + M + 2 + 2 + 2)
-      //=> 17					 6- 8 	protocal number
+      //=> 80					 6- 8 	protocal number
       //=> 99					 8-10	Length of Command => M
       //=> 0D 0A 				10-18	Server Flag Bit
       //=> 0D 0A 			*   18  -18+M	Command Content
@@ -524,20 +524,18 @@ net.createServer(function (socket) {
       //=> 0D 0A 			*   22+M-26+M	Serial Number
       //=> 0D 0A 			*   26+M-30+M	Error Check
       //=> 0D 0A 			*   30+M-34+M	Stop Bit
-      if(ProtocalNumber == "17"){
-      var LengthOfCommand = parseInt(str.substring(8,10)) -24;
+      if(ProtocalNumber == "80"){
+      var LengthOfCommand = parseInt(str.substring(4,6)) -24;
       var ServerFlagBit = str.substring(10,18);
       var CommandContent = str.substring(18,18+LengthOfCommand);
-      var Language = str.substring(18 + LengthOfCommand,38 + LengthOfCommand);
-      var PhoneNumber = str.substring(38 + LengthOfCommand , 80 + LengthOfCommand);
-      var grabage3 = str.substring(80 + LengthOfCommand, 82 + LengthOfCommand);
-      var InformationSerialNumber = str.substring(82 + LengthOfCommand , 86 + LengthOfCommand);
-      var ErrorCheck = str.substring(86 + LengthOfCommand,90 + LengthOfCommand);
-      var StopBit = str.substring(90 + LengthOfCommand,94 + LengthOfCommand);
-      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n LengthOfCommand : "+LengthOfCommand+"\n ServerFlagBit : "+ServerFlagBit+"\n ADDRESS : "+ADDRESS+"\n grabage1 : "+grabage1+"\n AddressContent : "+AddressContent+"\n AddressContent : "+AddressContent+"\n grabage2 : "+grabage2+"\n PhoneNumber : "+PhoneNumber+"\n grabage3 : "+grabage3+"\n InformationSerialNumber :"+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      var Language = str.substring(18 + LengthOfCommand,22 + LengthOfCommand);
+      var InformationSerialNumber = str.substring(22 + LengthOfCommand , 26 + LengthOfCommand);
+      var ErrorCheck = str.substring(26 + LengthOfCommand, 30 + LengthOfCommand);
+      var StopBit = str.substring(30 + LengthOfCommand , 34 + LengthOfCommand);
+      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Protocol Number : "+ProtocalNumber+"\n LengthOfCommand : "+LengthOfCommand+"\n ServerFlagBit : "+ServerFlagBit+"\n CommandContent : "+CommandContent+"\n Language : "+Language+"\n InformationSerialNumber :"+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Online command replied by terminal ---+
+      //{{{ specfic code for 21 Online command replied by terminal ---+
       //78789F179900000001414C41524D534D532626970752A862A58B66003A0047
       //0054003000360044002D00310032003800330036002D005A004A004D002C5E7F4E1C
       //7701002E60E05DDE5E02002E60E057CE533A002E4E915C71897F8DEF002E79BB60
@@ -545,14 +543,14 @@ net.createServer(function (socket) {
       //3326260000000000000000000000000000000000000000002323001CEA970D0A
       //=> 78 78 				 0- 4	Start Code
       //=> 05					 4- 6	Length of data bit ( 1 + 4 + 1 + M + 2 + 2 )
-      //=> 17					 6- 8 	protocal number
+      //=> 21					 6- 8 	protocal number
       //=> 0D 0A 				 8-16	Server Flag Bit
       //=> 0D 0A 			*       16-18   Content Code
       //=> 0D 0A 			*   18  -18+M   Content
       //=> 0D 0A 			*   18+M-22+M	Serial Number
       //=> 0D 0A 			*   22+M-26+M	Error Check
       //=> 0D 0A 			*   26+M-30+M	Stop Bit
-      if(ProtocalNumber == "17"){
+      if(ProtocalNumber == "21"){
       var LengthOfCommand = parseInt(str.substring(4,6)) - 20;
       var ServerFlagBit = str.substring(8,16);
       var ContentCode = str.substring(16,18);
@@ -563,11 +561,11 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Protocol Number : "+ProtocalNumber+"\n LengthOfCommand : "+LengthOfCommand+"\n ServerFlagBit : "+ServerFlagBit+"\n ContentCode : "+ContentCode+"\n Content : "+Content+"\n InformationSerialNumber :"+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Time Request Sent By Terminal ---+
+      //{{{ specfic code for 26 Time Request Sent By Terminal ---+
       //7878050100059FF80D0A
       //=> 78 78 				 0- 4	start code
       //=> 05					 4- 6	packet length
-      //=> 01					 6- 8 	protocal number
+      //=> 26					 6- 8 	protocal number
       //=> 00 05				 8-12	Information serial number
       //=> 9F F8				12-16	Error Check
       //=> 0D 0A 				16-20	Stop Bit
@@ -579,7 +577,7 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Server Responce Time Information ---+
+      //{{{ specfic code for 8A Server Responce Time Information ---+
       //7878050100059FF80D0A
       //=> 78 78 				 0- 4	start code
       //=> 05					 4- 6	packet length
@@ -597,7 +595,7 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n InformationContent : "+InformationContent+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Information Transmission Packet Sent by terminal ---+
+      //{{{ specfic code for 94 Information Transmission Packet Sent by terminal ---+
       //78789F179900000001414C41524D534D532626970752A862A58B66003A0047
       //0054003000360044002D00310032003800330036002D005A004A004D002C5E7F4E1C
       //7701002E60E05DDE5E02002E60E057CE533A002E4E915C71897F8DEF002E79BB60
