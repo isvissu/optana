@@ -30,7 +30,7 @@ net.createServer(function (socket) {
       //=> 05 12 				34-38 	this is the information serial number
       //=> 12 79 				38-42	error check
       //=> 0D 0A 				42-46	Stop Bit
-      if(ProtocalNumber == "01"){
+      if(ProtocalNumber == "01" && PacketLength == "11"){
       var TerminalID = str.substring(8,26);
       var ModelIDCode = str.substring(26,30);
       var TimeZoneLang = str.substring(30,34);
@@ -48,7 +48,7 @@ net.createServer(function (socket) {
       //=> 00 05				 8-12	Information serial number
       //=> 9F F8				12-16	Error Check
       //=> 0D 0A 				16-20	Stop Bit
-      if(ProtocalNumber == "01"){
+      if(ProtocalNumber == "01" && PacketLength == "05" ){
       var PacketLength = parseInt(str.substring(4,6));
       var InformationSerialNumber = str.substring(8,12);
       var ErrorCheck = str.substring(12,16);
