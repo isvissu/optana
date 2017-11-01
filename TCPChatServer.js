@@ -249,7 +249,7 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n LBSLength : "+LBSLength+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n TerminalInformation : "+TerminalInformation+"\n VoltageLevel : "+VoltageLevel+"\n GSMSignalStrength : "+GSMSignalStrength+"\n AlarmLanguage : "+AlarmLanguage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-     //{{{ specfic code for Alarm Packet Sent by Terminal Many Fence
+     //{{{ specfic code for 5.1 27 Alarm Packet Sent by Terminal Many Fence ---+
       //787822220F0C1D023305C9027AC8180C46586000140001CC00287D001F71000001000820860D0A
       // functions LBS Multiple Base Extension Packet
       //=> 78 78 				 0- 4	start code
@@ -275,6 +275,7 @@ net.createServer(function (socket) {
       //=> 47 2A				78-82 	Error Check
       //=> 0D 0A				82-86 	Stop Bit
       else if(ProtocalNumber == "27"){
+      var PacketLength = parseInt(str.substring(4,6));
       var DateTime = str.substring(8,20);
       var QualityOfGPSSignal = str.substring(20,22);
       var Latitude = str.substring(22,30);
