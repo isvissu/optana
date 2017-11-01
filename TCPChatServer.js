@@ -411,11 +411,11 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n PhoneNumber :"+PhoneNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Terminal Address Request Packet
+      //{{{ specfic code for 17 Terminal Address Request Packet ---+
       //787822220F0C1D023305C9027AC8180C46586000140001CC00287D001F71000001000820860D0A
       //=> 78 78 				 0- 4	start code
       //=> 22					 4- 6	packet length
-      //=> 22					 6- 8 	protocal number
+      //=> 17					 6- 8 	protocal number
       //=> 00 01				 8-12	MCC
       //=> 02					12-14	MNC
       //=> 02					14-18	LAC
@@ -425,7 +425,8 @@ net.createServer(function (socket) {
       //=> 00 0F				70-74	Serial Number
       //=> DC EE				74-78	Error Check
       //=> 0D 0A 				78-82	Stop Bit
-      else if(ProtocalNumber == "22"){
+      else if(ProtocalNumber == "17"){
+      var PacketLength = parseInt(str.substring(4,6));
       var MCC = str.substring(8,12);
       var MNC = str.substring(12,14);
       var LAC = str.substring(14,18);
