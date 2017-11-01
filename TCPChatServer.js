@@ -19,7 +19,7 @@ net.createServer(function (socket) {
       var StartBit = str.substring(0,4);
       var PacketLength = str.substring(4,6);
       var ProtocalNumber = str.substring(6,8);
-      //{{{ specfic code for login packet
+      //{{{ specfic code for 1.1 01 login packet ---+
       //78781101075253367890024270003201000512790D0A
       //=> 78 78 				 0- 4	start code
       //=> 11 * 4 => 44 			 4- 6	length
@@ -27,9 +27,9 @@ net.createServer(function (socket) {
       //=> 07 52 53 36 78 90 02 42 70 => 	 8-26	imei number
       //=> 00 32  				26-30	model Identification code
       //=> 01 00  				30-34	time zone and language
-      //=> 05 12 				34-36 	this is the information serial number
-      //=> 12 79 				36-40	error check
-      //=> 0D 0A 				40-44	Stop Bit
+      //=> 05 12 				34-38 	this is the information serial number
+      //=> 12 79 				38-42	error check
+      //=> 0D 0A 				42-46	Stop Bit
       if(ProtocalNumber == "01"){
       var TerminalID = str.substring(8,26);
       var ModelIDCode = str.substring(26,30);
@@ -40,7 +40,7 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal ID : "+TerminalID+"\n model Identification Code : "+ModelIDCode+"\n TimeZone and Language code : "+TimeZoneLang+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for login packet Response
+      //{{{ specfic code for 1.2 01 login packet Response ---+
       //7878050100059FF80D0A
       //=> 78 78 				 0- 4	start code
       //=> 05					 4- 6	packet length
@@ -49,13 +49,14 @@ net.createServer(function (socket) {
       //=> 9F F8				12-16	Error Check
       //=> 0D 0A 				16-20	Stop Bit
       if(ProtocalNumber == "01"){
+      var PacketLength = parseInt(str.substring(4,6));
       var InformationSerialNumber = str.substring(8,12);
       var ErrorCheck = str.substring(12,16);
       var StopBit = str.substring(16,20);
-      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      console.log(" packet data:\n packet sent by server: "+str+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for heart beat packet
+      //{{{ specfic code for 2.1 13 heart beat packet ---+
       //78780A134004040001000FDCEE0D0A
       //=> 78 78 				 0- 4	start code
       //=> 0A					 4- 6	packet length
@@ -68,6 +69,7 @@ net.createServer(function (socket) {
       //=> DC EE				22-26	Error Check
       //=> 0D 0A 				26-30	Stop Bit
       else if(ProtocalNumber == "13"){
+      var PacketLength = parseInt(str.substring(4,6));
       var TerminalInformationContent = str.substring(8,10);
       var VoltageLevel = str.substring(10,12);
       var SGMSignalStrength = str.substring(12,14);
@@ -75,10 +77,10 @@ net.createServer(function (socket) {
       var InformationSerialNumber = str.substring(18,22);
       var ErrorCheck = str.substring(22,26);
       var StopBit = str.substring(26,30);
-      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal Information Content : "+TerminalInformationContent+"\n SGM Signal Strength : "+SGMSignalStrength+"\n TimeZone and Port code : "+TimeZonePort+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal Information Content : "+TerminalInformationContent+"\n SGM Signal Strength : "+SGMSignalStrength+"\n TimeZone and Port code : "+TimeZonePort+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Server Response Heart Beat Packet
+      //{{{ specfic code for 2.2 13 Server Response Heart Beat Packet ---+
       //7878050100059FF80D0A
       //=> 78 78 				 0- 4	start code
       //=> 05					 4- 6	packet length
@@ -87,13 +89,14 @@ net.createServer(function (socket) {
       //=> 9F F8				12-16	Error Check
       //=> 0D 0A 				16-20	Stop Bit
       if(ProtocalNumber == "05"){
+      var PacketLength = parseInt(str.substring(4,6));
       var InformationSerialNumber = str.substring(8,12);
       var ErrorCheck = str.substring(12,16);
       var StopBit = str.substring(16,20);
-      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      console.log(" packet data:\n packet sent by server: "+str+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Location packet
+      //{{{ specfic code for 3.1 22 Location packet ---+
       //787822220F0C1D023305C9027AC8180C46586000140001CC00287D001F71000001000820860D0A
       //=> 78 78 				 0- 4	start code
       //=> 22					 4- 6	packet length
@@ -102,20 +105,21 @@ net.createServer(function (socket) {
       //=> 0F 0C 1D 02 33 05			20-22	Quantity of GPS Signal
       //=> C9	02 7A C8 			22-30	Latitude
       //=> 18 0C 46 58	         		30-38	Longitude
-      //=> 60					38-42	Speed
-      //=> 00 14				42-44	Course Status
+      //=> 60					38-40	Speed
+      //=> 00 14				40-44	Course Status
       //=> 00 01				44-48	MCC
       //=> 02					48-50	MNC
       //=> 02					50-54	LAC
       //=> 02					54-60	CELL ID
       //=> 02					60-62	ACC
       //=> 02					62-64	Data Upload Mode
-      //=> 02					64-68	GPS Real-Time Re-upload
-      //=> 02					68-76	Mileage
-      //=> 00 0F				76-82	Serial Number
-      //=> DC EE				82-86	Error Check
-      //=> 0D 0A 				86-90	Stop Bit
+      //=> 02					64-66	GPS Real-Time Re-upload
+      //=> 02					66-74	Mileage
+      //=> 00 0F				74-78	Serial Number
+      //=> DC EE				78-82	Error Check
+      //=> 0D 0A 				82-86	Stop Bit
       else if(ProtocalNumber == "22"){
+      var PacketLength = parseInt( str.substring(4,6));
       var DateTime = str.substring(8,20);
       var QualityOfGPSSignal = str.substring(20,22);
       var Latitude = str.substring(22,30);
@@ -133,7 +137,7 @@ net.createServer(function (socket) {
       var InformationSerialNumber = str.substring(76,82);
       var ErrorCheck = str.substring(82,86);
       var StopBit = str.substring(86,90);
-      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n ACC : "+ACC+"\n DataUploadMode : "+DataUploadMode+"\n GPS Real Time Re-Upload : "+GPSRealTimeReUpload+"\n Mileage : "+Mileage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n ACC : "+ACC+"\n DataUploadMode : "+DataUploadMode+"\n GPS Real Time Re-Upload : "+GPSRealTimeReUpload+"\n Mileage : "+Mileage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
       //{{{ specfic code for 4.a 28 LBS Multiple Base Extension Packet ---+
