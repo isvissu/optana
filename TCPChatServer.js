@@ -136,7 +136,7 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n ACC : "+ACC+"\n DataUploadMode : "+DataUploadMode+"\n GPS Real Time Re-Upload : "+GPSRealTimeReUpload+"\n Mileage : "+Mileage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for LBS Multiple Base Extension Packet
+      //{{{ specfic code for 4.a 28 LBS Multiple Base Extension Packet ---+
       //78783B2810010D02020201CC00287D001F713E287D001F7231287D001E232D287D001F4018
       //000000000000000000000000000000000000FF00020005B14B0D0A
       //=> 78 78 				 0- 4	start code
