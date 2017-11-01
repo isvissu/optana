@@ -204,7 +204,7 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC"+LAC+"\n CI : "+CI+"\n RSSI : "+RSSI+"\n LAC1"+LAC1+"\n CI1 : "+CI1+"\n RSSI1 : "+RSSI1+"\n LAC2"+LAC2+"\n CI2 : "+CI2+"\n RSSI2 : "+RSSI2+"\n LAC3"+LAC3+"\n CI3 : "+CI3+"\n RSSI3 : "+RSSI3+"\n LAC4"+LAC4+"\n CI4 : "+CI4+"\n RSSI4 : "+RSSI4+"\n LAC5"+LAC5+"\n CI5 : "+CI5+"\n RSSI5 : "+RSSI5+"\n LAC6"+LAC6+"\n CI6 : "+CI6+"\n RSSI6 : "+RSSI6+"\n TimingAdvance : "+TimingAdvance+"\n Language : "+Language+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for Alarm Packet Sent by Terminal One Fence
+      //{{{ specfic code for 5.1 26 Alarm Packet Sent by Terminal One Fence ---+
       //787822220F0C1D023305C9027AC8180C46586000140001CC00287D001F71000001000820860D0A
       //=> 78 78 				 0- 4	start code
       //=> 25					 4- 6	packet length
@@ -228,6 +228,7 @@ net.createServer(function (socket) {
       //=> 47 2A				76-80 	Error Check
       //=> 0D 0A				80-84 	Stop Bit
       else if(ProtocalNumber == "26"){
+      var PacketLength = parseInt(str.substring(4,6));
       var DateTime = str.substring(8,20);
       var QualityOfGPSSignal = str.substring(20,22);
       var Latitude = str.substring(22,30);
