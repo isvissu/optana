@@ -411,6 +411,33 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n DateTime : "+DateTime+"\n Quality of the GPS signal : "+QualityOfGPSSignal+"\n Latitude :"+Latitude+"\n Longitude : "+Longitude+"\n Speed : "+Speed+"\n CourseStatus : "+CourseStatus+"\n PhoneNumber :"+PhoneNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
+      //{{{ specfic code for Terminal Address Request Packet
+      //787822220F0C1D023305C9027AC8180C46586000140001CC00287D001F71000001000820860D0A
+      //=> 78 78 				 0- 4	start code
+      //=> 22					 4- 6	packet length
+      //=> 22					 6- 8 	protocal number
+      //=> 00 01				 8-12	MCC
+      //=> 02					12-14	MNC
+      //=> 02					14-18	LAC
+      //=> 02					18-24	CELL ID
+      //=> 02					24-66	Phone Number
+      //=> 00 0F				66-70	Alarm Language
+      //=> 00 0F				70-74	Serial Number
+      //=> DC EE				74-78	Error Check
+      //=> 0D 0A 				78-82	Stop Bit
+      else if(ProtocalNumber == "22"){
+      var MCC = str.substring(8,12);
+      var MNC = str.substring(12,14);
+      var LAC = str.substring(14,18);
+      var CELLID = str.substring(18,24);
+      var PhoneNumber = str.substring(24,66);
+      var AlarmLanguage = str.substring(66,70);
+      var InformationSerialNumber = str.substring(70,74);
+      var ErrorCheck = str.substring(74,78);
+      var StopBit = str.substring(78,82);
+      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n PhoneNumber :"+PhoneNumber+"\n AlarmLanguage : "+AlarmLanguage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      }
+      //}}}
       //{{{ specfic code for chinese Responce of Server address Request packet
       //78789F179900000001414C41524D534D532626970752A862A58B66003A0047
       //0054003000360044002D00310032003800330036002D005A004A004D002C5E7F4E1C
@@ -446,66 +473,39 @@ net.createServer(function (socket) {
       console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n LengthOfCommand : "+LengthOfCommand+"\n ServerFlagBit : "+ServerFlagBit+"\n ADDRESS : "+ADDRESS+"\n grabage1 : "+grabage1+"\n AddressContent : "+AddressContent+"\n AddressContent : "+AddressContent+"\n grabage2 : "+grabage2+"\n PhoneNumber : "+PhoneNumber+"\n grabage3 : "+grabage3+"\n InformationSerialNumber :"+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
-      //{{{ specfic code for english Responce of Server address Request packet
+      //{{{ specfic code for 97 english Responce of Server address Request packet ---+
       //78789F179900000001414C41524D534D532626970752A862A58B66003A0047
       //0054003000360044002D00310032003800330036002D005A004A004D002C5E7F4E1C
       //7701002E60E05DDE5E02002E60E057CE533A002E4E915C71897F8DEF002E79BB60
       //E05DDE5E025B665927655980B27EA6003200377C73002E002C00310030003A003400
       //3326260000000000000000000000000000000000000000002323001CEA970D0A
       //=> 78 78 				 0- 4	Start Code
-      //=> 05					 4- 6	Length of data bit
-      //=> 17					 6- 8 	protocal number
-      //=> 99					 8-10	Length of Command => M
-      //=> 0D 0A 				10-18	Server Flag Bit
-      //=> 0D 0A 				18-32	ADDRESS
-      //=> 0D 0A 				32-36	&&
-      //=> 0D 0A 			*   36  -36+M	Address Content
-      //=> 0D 0A 			*   36+M-38+M	&&
-      //=> 0D 0A 			*   38+M-80+M	Phone Number
-      //=> 0D 0A 			*   80+M-82+M	##
-      //=> 0D 0A 			*   82+M-86+M	Serial Number
-      //=> 0D 0A 			*   86+M-90+M	Error Check
-      //=> 0D 0A 			*   90+M-94+M	Stop Bit
-      if(ProtocalNumber == "17"){
-      var LengthOfCommand = parseInt(str.substring(8,10));
-      var ServerFlagBit = str.substring(10,18);
-      var ADDRESS = str.substring(18,32);
-      var grabage1 = str.substring(32,36);
-      var AddressContent = str.substring(36,36+LengthOfCommand);
-      var grabage2 = str.substring(36 + LengthOfCommand,38 + LengthOfCommand);
-      var PhoneNumber = str.substring(38 + LengthOfCommand , 80 + LengthOfCommand);
-      var grabage3 = str.substring(80 + LengthOfCommand, 82 + LengthOfCommand);
-      var InformationSerialNumber = str.substring(82 + LengthOfCommand , 86 + LengthOfCommand);
-      var ErrorCheck = str.substring(86 + LengthOfCommand,90 + LengthOfCommand);
-      var StopBit = str.substring(90 + LengthOfCommand,94 + LengthOfCommand);
-      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n LengthOfCommand : "+LengthOfCommand+"\n ServerFlagBit : "+ServerFlagBit+"\n ADDRESS : "+ADDRESS+"\n grabage1 : "+grabage1+"\n AddressContent : "+AddressContent+"\n AddressContent : "+AddressContent+"\n grabage2 : "+grabage2+"\n PhoneNumber : "+PhoneNumber+"\n grabage3 : "+grabage3+"\n InformationSerialNumber :"+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
-      }
-      //}}}
-      //{{{ specfic code for Terminal Address Request Packet
-      //787822220F0C1D023305C9027AC8180C46586000140001CC00287D001F71000001000820860D0A
-      //=> 78 78 				 0- 4	start code
-      //=> 22					 4- 6	packet length
-      //=> 22					 6- 8 	protocal number
-      //=> 00 01				 8-12	MCC
-      //=> 02					12-14	MNC
-      //=> 02					14-18	LAC
-      //=> 02					18-24	CELL ID
-      //=> 02					24-66	Phone Number
-      //=> 00 0F				66-70	Alarm Language
-      //=> 00 0F				70-74	Serial Number
-      //=> DC EE				74-78	Error Check
-      //=> 0D 0A 				78-82	Stop Bit
-      else if(ProtocalNumber == "22"){
-      var MCC = str.substring(8,12);
-      var MNC = str.substring(12,14);
-      var LAC = str.substring(14,18);
-      var CELLID = str.substring(18,24);
-      var PhoneNumber = str.substring(24,66);
-      var AlarmLanguage = str.substring(66,70);
-      var InformationSerialNumber = str.substring(70,74);
-      var ErrorCheck = str.substring(74,78);
-      var StopBit = str.substring(78,82);
-      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n MCC : "+MCC+"\n MNC : "+MNC+"\n LAC : "+LAC+"\n CELL ID : "+CELLID+"\n PhoneNumber :"+PhoneNumber+"\n AlarmLanguage : "+AlarmLanguage+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      //=> 05					 4- 8	Length of data bit (1+1+4+7+2+M+2+21+2+2+2)
+      //=> 97					 8-10 	protocal number
+      //=> 99					10-12	Length of Command => M
+      //=> 0D 0A 				12-20	Server Flag Bit
+      //=> 0D 0A 				20-34	ADDRESS
+      //=> 0D 0A 				34-38	&&
+      //=> 0D 0A 			*   38  -38+M	Address Content
+      //=> 0D 0A 			*   38+M-42+M	&&
+      //=> 0D 0A 			*   42+M-84+M	Phone Number
+      //=> 0D 0A 			*   84+M-88+M	##
+      //=> 0D 0A 			*   88+M-92+M	Serial Number
+      //=> 0D 0A 			*   92+M-96+M	Error Check
+      //=> 0D 0A 			*   96+M-98+M	Stop Bit
+      if(ProtocalNumber == "97"){
+      var LengthOfCommand = parseInt(str.substring(4,8))-88;
+      var ServerFlagBit = str.substring(12,20);
+      var ADDRESS = str.substring(20,34);
+      var grabage1 = str.substring(34,38);
+      var AddressContent = str.substring(38,38+LengthOfCommand);
+      var grabage2 = str.substring(38 + LengthOfCommand,42 + LengthOfCommand);
+      var PhoneNumber = str.substring(42 + LengthOfCommand , 84 + LengthOfCommand);
+      var grabage3 = str.substring(84 + LengthOfCommand, 88 + LengthOfCommand);
+      var InformationSerialNumber = str.substring(88 + LengthOfCommand , 92 + LengthOfCommand);
+      var ErrorCheck = str.substring(92 + LengthOfCommand,96 + LengthOfCommand);
+      var StopBit = str.substring(96 + LengthOfCommand,98 + LengthOfCommand);
+      console.log(" packet data:\n packet sent by server: "+str+"\n Start Bit : "+StartBit+"\n Protocol Number : "+ProtocalNumber+"\n LengthOfCommand : "+LengthOfCommand+"\n ServerFlagBit : "+ServerFlagBit+"\n ADDRESS : "+ADDRESS+"\n grabage1 : "+grabage1+"\n AddressContent : "+AddressContent+"\n AddressContent : "+AddressContent+"\n grabage2 : "+grabage2+"\n PhoneNumber : "+PhoneNumber+"\n grabage3 : "+grabage3+"\n InformationSerialNumber :"+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
       }
       //}}}
       //{{{ specfic code for 80 Online command sent by server ---+
