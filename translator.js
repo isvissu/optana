@@ -140,6 +140,7 @@ CRAlen,				//10 chainese responce has variable length solved by putting the vari
 ERAlen,				//11 english responce has variable length solved by var length
 CRGlen,				//13 chainese responce has variable length solved by var length
 ERGlen,				//14 english responce has variable length solved by var length
+//{{{
 CRCDic =[
 0X0000,0X1189,0X2312,0X329B,0X4624,0X57AD,0X6536,0X74BF,
 0X8C48,0X9DC1,0XAF5A,0XBED3,0XCA6C,0XDBE5,0XE97E,0XF8F7,
@@ -174,6 +175,7 @@ CRCDic =[
 0XF78F,0XE606,0XD49D,0XC514,0XB1AB,0XA022,0X92B9,0X8330,
 0X7BC7,0X6A4E,0X58D5,0X495C,0X3DE3,0X2C6A,0X1EF1,0X0F78
 ],
+//}}}
 //}}}
 //{{{ constants of the enigma
 const
