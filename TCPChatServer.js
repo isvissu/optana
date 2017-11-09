@@ -21,7 +21,7 @@ net.createServer(function (socket) {
       var ProtocalNumber = str.substring(6,8);
       var codeOfsending = -1;
 //{{{ CRCTab16
-CRCDic =[
+const CRCDic =[
 0X0000,0X1189,0X2312,0X329B,0X4624,0X57AD,0X6536,0X74BF,
 0X8C48,0X9DC1,0XAF5A,0XBED3,0XCA6C,0XDBE5,0XE97E,0XF8F7,
 0X1081,0X0108,0X3393,0X221A,0X56A5,0X472C,0X75B7,0X643E,
@@ -54,7 +54,18 @@ CRCDic =[
 0X6B46,0X7ACF,0X4854,0X59DD,0X2D62,0X3CEB,0X0E70,0X1FF9,
 0XF78F,0XE606,0XD49D,0XC514,0XB1AB,0XA022,0X92B9,0X8330,
 0X7BC7,0X6A4E,0X58D5,0X495C,0X3DE3,0X2C6A,0X1EF1,0X0F78
-],
+];
+
+function U16GetCrc(pData,nLength){
+U16fcs = 0xffff;//init u16fcs
+while( nLength > 0 ){
+fcs = (fcs>>8)^CRCDic[ (fcs^pData) & 0xff ];
+nLength--;
+pData++;
+}
+return ~fcs;
+}
+
 //}}}
       //{{{ specfic code for 1.1 01 login packet ---+
       //78781101075253367890024270003201000512790D0A
