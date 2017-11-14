@@ -57,13 +57,16 @@ const CRCDic =[
 ];
 
 function U16GetCrc(pData,nLength){
-U16fcs = 0xffff;//init u16fcs
+var fcs = Buffer.from("0XFFFF","hex");//init u16fcs
+var i = 0;
+var d = Buffer.from(pData,"hex");
 while( nLength > 0 ){
-fcs = (fcs>>8)^CRCDic[ (fcs^pData) & 0xff ];
+fcs.slice(0,1) = (fcs.slice(0,1)>>8)^CRCDic[ (fcs.slice(0,1)^d[i]) & 0xff ];
 nLength--;
-pData++;
+i++;
 }
-return ~fcs;
+
+return ~fcs.slice(0,1);
 }
 
 //}}}
@@ -85,7 +88,9 @@ return ~fcs;
       var InformationSerialNumber = str.substring(34,36);
       var ErrorCheck = str.substring(36,40);
       var StopBit = str.substring(40,44);
-      console.log(" packet data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal ID : "+TerminalID+"\n model Identification Code : "+ModelIDCode+"\n TimeZone and Language code : "+TimeZoneLang+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n");
+      var crc = U16GetCrc( str/*.substring(4,38)*/, 0x11 );
+      var buff =Buffer.from(data,'hex');
+      console.log("Data :"+data+"\nBinary data :"+buff[0].toString(2)+"\npacket data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal ID : "+TerminalID+"\n model Identification Code : "+ModelIDCode+"\n TimeZone and Language code : "+TimeZoneLang+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n CRC :"+parseInt(crc));
       }
       //}}}
       //{{{ specfic code for 1.2 01 login packet Response ---+
@@ -766,7 +771,7 @@ return ~fcs;
       } );
       process.stdout.write(message);
    }
-}).listen(8000);
+}).listen(8080);
 // port off set }}}
 // {{{ the cartel info
 console.log("cartel is runnig on the port 8000\n");
