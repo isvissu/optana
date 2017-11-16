@@ -21,7 +21,7 @@ net.createServer(function (socket) {
       var ProtocalNumber = str.substring(6,8);
       var codeOfsending = -1;
 //{{{ CRCTab16
-const CRCDic =[
+const CRCDic =new Uint16Array([
 0X0000,0X1189,0X2312,0X329B,0X4624,0X57AD,0X6536,0X74BF,
 0X8C48,0X9DC1,0XAF5A,0XBED3,0XCA6C,0XDBE5,0XE97E,0XF8F7,
 0X1081,0X0108,0X3393,0X221A,0X56A5,0X472C,0X75B7,0X643E,
@@ -54,14 +54,15 @@ const CRCDic =[
 0X6B46,0X7ACF,0X4854,0X59DD,0X2D62,0X3CEB,0X0E70,0X1FF9,
 0XF78F,0XE606,0XD49D,0XC514,0XB1AB,0XA022,0X92B9,0X8330,
 0X7BC7,0X6A4E,0X58D5,0X495C,0X3DE3,0X2C6A,0X1EF1,0X0F78
-];
+]);
 
-function U16GetCrc(pData,nLength){
-var fcs = Buffer.from("0XFFFF","hex");//init u16fcs
+function GetCrc(pData,nLength){
+var fcs = new Uint16Array(2);//init u16fcs
+fcs[0] = 0xffff;
 var i = 0;
-var d = Buffer.from(pData,"hex");
+var d = new Uint16Array(pData);
 while( nLength > 0 ){
-fcs.slice(0,1) = (fcs.slice(0,1)>>8)^CRCDic[ (fcs.slice(0,1)^d[i]) & 0xff ];
+fcs[0] = (fcs[0]>>>8)^CRCDic[ (fcs[0]^d[i]) & 0xff ];
 nLength--;
 i++;
 }
@@ -88,7 +89,7 @@ return ~fcs.slice(0,1);
       var InformationSerialNumber = str.substring(34,36);
       var ErrorCheck = str.substring(36,40);
       var StopBit = str.substring(40,44);
-      var crc = U16GetCrc( str/*.substring(4,38)*/, 0x11 );
+      var crc = GetCrc( data/*.substring(4,38)*/, 0x11 );
       var buff =Buffer.from(data,'hex');
       console.log("Data :"+data+"\nBinary data :"+buff[0].toString(2)+"\npacket data:\n packet sent by terminal: "+str+"\n Start Bit : "+StartBit+"\n Packet Length : "+PacketLength+"\n Protocol Number : "+ProtocalNumber+"\n Terminal ID : "+TerminalID+"\n model Identification Code : "+ModelIDCode+"\n TimeZone and Language code : "+TimeZoneLang+"\n Information Serial Number : "+InformationSerialNumber+"\n Error Check : "+ErrorCheck+"\n Stop Bit : "+StopBit+"\n CRC :"+parseInt(crc));
       }
