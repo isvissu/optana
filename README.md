@@ -6,17 +6,17 @@ mock chat with the device sending and reciving the packets
 different protocols 
 ## specfic code for 1.1 
    01 login packet ---+
-      78781101075253367890024270003201000512790D0A
-     > 78 78 				 0- 4	start code
-     > 11 * 4 = 44 	 4- 6	length
-     > 01 > 				 6- 8	protocal number
-     > 07 52 53 36 78 90 02 42 70 > 	 8-26	imei number
-     > 00 32  				26-30	model Identification code
-     > 00 32  				26-30	model Identification code
-     > 01 00  				30-34	time zone and language
-     > 05 12 				34-38 	this is the information serial number
-     > 12 79 				38-42	error check
-     > 0D 0A 				42-46	Stop Bit
+   78781101075253367890024270003201000512790D0A
+   > 78 78 				 0- 4	start code
+   > 11 * 4 = 44 	 4- 6	length
+   > 01 > 				 6- 8	protocal number
+   > 07 52 53 36 78 90 02 42 70 > 	 8-26	imei number
+   > 00 32  				26-30	model Identification code
+   > 00 32  				26-30	model Identification code
+   > 01 00  				30-34	time zone and language
+   > 05 12 				34-38 	this is the information serial number
+   > 12 79 				38-42	error check
+   > 0D 0A 				42-46	Stop Bit
 ## specfic code for 1.2 
    01 login packet Response ---+
       7878050100059FF80D0A
