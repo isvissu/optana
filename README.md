@@ -1,11 +1,11 @@
-#Hapi frame work 
+# Hapi frame work 
 
 TCP chat framework 
 mock chat with the device sending and reciving the packets
 
 different protocols 
-##specfic code for 1.1 
-          01 login packet ---+
+## specfic code for 1.1 
+   01 login packet ---+
       78781101075253367890024270003201000512790D0A
       => 78 78 				 0- 4	start code
       => 11 * 4 => 44 			 4- 6	length
@@ -16,8 +16,8 @@ different protocols
       => 05 12 				34-38 	this is the information serial number
       => 12 79 				38-42	error check
       => 0D 0A 				42-46	Stop Bit
-      ##specfic code for 1.2 
-        01 login packet Response ---+
+## specfic code for 1.2 
+   01 login packet Response ---+
       7878050100059FF80D0A
       => 78 78 				 0- 4	start code
       => 05					 4- 6	packet length
@@ -25,8 +25,8 @@ different protocols
       => 00 05				 8-12	Information serial number
       => 9F F8				12-16	Error Check
       => 0D 0A 				16-20	Stop Bit
-      ## specfic code for 2.1 
-      13 heart beat packet ---+
+## specfic code for 2.1 
+   13 heart beat packet ---+
       78780A134004040001000FDCEE0D0A
       => 78 78 				 0- 4	start code
       => 0A					 4- 6	packet length
@@ -38,8 +38,8 @@ different protocols
       => 00 0F				18-22	Serial Number
       => DC EE				22-26	Error Check
       => 0D 0A 				26-30	Stop Bit
-      ## specfic code for 2.2 
-      13 Server Response Heart Beat Packet ---+
+ ## specfic code for 2.2 
+   13 Server Response Heart Beat Packet ---+
       7878050100059FF80D0A
       => 78 78 				 0- 4	start code
       => 05					 4- 6	packet length
@@ -47,8 +47,8 @@ different protocols
       => 00 05				 8-12	Information serial number
       => 9F F8				12-16	Error Check
       => 0D 0A 				16-20	Stop Bit
-      ## specfic code for 3.1 
-      22 Location packet ---+
+  ## specfic code for 3.1 
+   22 Location packet ---+
       787822220F0C1D023305C9027AC8180C46586000140001CC00287D001F71000001000820860D0A
       => 78 78 				 0- 4	start code
       => 22					 4- 6	packet length
